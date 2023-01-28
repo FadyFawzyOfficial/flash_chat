@@ -1,6 +1,6 @@
-import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import 'sign_in_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -26,9 +26,12 @@ class WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Row(
               children: [
-                SizedBox(
-                  height: 60.0,
-                  child: Image.asset('assets/images/logo.png'),
+                Hero(
+                  tag: kLogoImageTag,
+                  child: SizedBox(
+                    height: 60.0,
+                    child: Image.asset(kLogoImagePath),
+                  ),
                 ),
                 const Text(
                   kFlashChatTitle,

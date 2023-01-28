@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class SignUpScreen extends StatefulWidget {
   static const name = 'signUp';
 
@@ -20,9 +22,12 @@ class SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 200.0,
-              child: Image.asset('assets/images/logo.png'),
+            Hero(
+              tag: kLogoImageTag,
+              child: SizedBox(
+                height: 200.0,
+                child: Image.asset(kLogoImagePath),
+              ),
             ),
             const SizedBox(height: 48.0),
             TextField(

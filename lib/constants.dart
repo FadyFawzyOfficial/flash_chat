@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
+// Titles
 const kFlashChatTitle = 'Flash Chat';
+
+// Buttons Labels
 const kSignInLabel = 'Sign In';
 const kSignUpLabel = 'Sign Up';
+
+// Animations Tags
+const kLogoImageTag = 'logo';
+
+// Images Paths
+const kLogoImagePath = 'assets/images/logo.png';
 
 const kSendButtonTextStyle = TextStyle(
   color: Colors.lightBlueAccent,
