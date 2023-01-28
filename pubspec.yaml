@@ -1,5 +1,5 @@
 name: flash_chat
-description: A new Flutter project.
+description: Flash Chat is modern messaging app where users can sign up and log in to chat.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,7 +35,8 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  # Fady Fawzy Comment: Flutter Version is 3.3.3
+  cupertino_icons: ^1.0.5
 
 dev_dependencies:
   flutter_test:
