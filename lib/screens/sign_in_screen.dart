@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
+  static const name = 'signIn';
+
   const SignInScreen({super.key});
 
   @override
