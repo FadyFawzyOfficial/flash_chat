@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const kFlashChatTitle = 'Flash Chat';
+const kSignInLabel = 'Sign In';
+const kSignUpLabel = 'Sign Up';
+
 const kSendButtonTextStyle = TextStyle(
   color: Colors.lightBlueAccent,
   fontWeight: FontWeight.bold,
