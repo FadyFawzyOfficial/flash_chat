@@ -22,7 +22,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 SizedBox(
                   height: 60.0,
-                  child: Image.asset('images/logo.png'),
+                  child: Image.asset('assets/images/logo.png'),
                 ),
                 const Text(
                   'Flash Chat',

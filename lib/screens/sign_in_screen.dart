@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  LoginScreenState createState() => LoginScreenState();
+  SignInScreenState createState() => SignInScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class LoginScreenState extends State<LoginScreen> {
           children: [
             SizedBox(
               height: 200.0,
-              child: Image.asset('images/logo.png'),
+              child: Image.asset('assets/images/logo.png'),
             ),
             const SizedBox(height: 48),
             TextField(
