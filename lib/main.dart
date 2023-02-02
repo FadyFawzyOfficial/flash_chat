@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'screens/chat_screen.dart';
+import 'screens/sign_in_screen.dart';
+import 'screens/sign_up_screen.dart';
 import 'screens/welcome_screen.dart';
 
 void main() => runApp(const FlashChat());
@@ -12,10 +15,16 @@ class FlashChat extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.black54),
+          bodyMedium: TextStyle(color: Colors.black54),
         ),
       ),
-      home: const WelcomeScreen(),
+      initialRoute: WelcomeScreen.name,
+      routes: {
+        WelcomeScreen.name: (context) => const WelcomeScreen(),
+        SignUpScreen.name: (context) => const SignUpScreen(),
+        SignInScreen.name: (context) => const SignInScreen(),
+        ChatScreen.name: (context) => const ChatScreen(),
+      },
     );
   }
 }

@@ -1,6 +1,12 @@
+import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'sign_in_screen.dart';
+import 'sign_up_screen.dart';
+
 class WelcomeScreen extends StatefulWidget {
+  static const name = 'welcome';
+
   const WelcomeScreen({super.key});
 
   @override
@@ -25,7 +31,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                   child: Image.asset('assets/images/logo.png'),
                 ),
                 const Text(
-                  'Flash Chat',
+                  kFlashChatTitle,
                   style: TextStyle(
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,
@@ -41,12 +47,13 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                 color: Colors.lightBlueAccent,
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
-                  onPressed: () {
-                    //Go to login screen.
-                  },
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    SignInScreen.name,
+                  ),
                   minWidth: 200.0,
                   height: 42.0,
-                  child: const Text('Log In'),
+                  child: const Text(kSignInLabel),
                 ),
               ),
             ),
@@ -57,12 +64,13 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                 borderRadius: BorderRadius.circular(30.0),
                 elevation: 5.0,
                 child: MaterialButton(
-                  onPressed: () {
-                    //Go to registration screen.
-                  },
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    SignUpScreen.name,
+                  ),
                   minWidth: 200.0,
                   height: 42.0,
-                  child: const Text('Register'),
+                  child: const Text(kSignUpLabel),
                 ),
               ),
             ),
