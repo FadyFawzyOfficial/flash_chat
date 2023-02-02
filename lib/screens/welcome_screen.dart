@@ -30,14 +30,12 @@ class WelcomeScreenState extends State<WelcomeScreen>
     // that we can't actually have an upperBound that's greater than 1.
     animation = CurvedAnimation(
       parent: animationController,
-      curve: Curves.easeIn,
+      curve: Curves.decelerate,
     );
 
-    animationController.forward();
+    animationController.reverse(from: 1);
 
-    animationController.addListener(() {
-      setState(() {});
-    });
+    animationController.addListener(() => setState(() {}));
   }
 
   @override
