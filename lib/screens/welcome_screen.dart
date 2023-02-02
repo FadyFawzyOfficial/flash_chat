@@ -26,24 +26,14 @@ class WelcomeScreenState extends State<WelcomeScreen>
       duration: const Duration(seconds: 1),
     );
 
-    // Make sure that when you are applying a curved animation to your controller
-    // that we can't actually have an upperBound that's greater than 1.
-    animation = CurvedAnimation(
-      parent: animationController,
-      curve: Curves.decelerate,
-    );
-
     animationController.forward();
 
     animationController.addListener(() => setState(() {}));
 
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        animationController.reverse(from: 1);
-      } else if (status == AnimationStatus.dismissed) {
-        animationController.forward();
-      }
-    });
+    animation = ColorTween(
+      begin: Colors.blueGrey,
+      end: Colors.white,
+    ).animate(animationController);
   }
 
   @override
@@ -62,7 +52,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -74,11 +64,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
                 Hero(
                   tag: kLogoImageTag,
                   child: SizedBox(
-                    // But having an animation that goes from 0 to 1 for the size
-                    // of our image is not very useful because we won't be able
-                    // to see a change between 0 and 1.
-                    // So let's multiply that number by 60 to exaggerate the effect.
-                    height: animation.value * 60,
+                    height: 60,
                     child: Image.asset(kLogoImagePath),
                   ),
                 ),
