@@ -13,11 +13,46 @@ class WelcomeScreen extends StatefulWidget {
   WelcomeScreenState createState() => WelcomeScreenState();
 }
 
-class WelcomeScreenState extends State<WelcomeScreen> {
+class WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation animation;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+    animationController.forward();
+
+    animationController.addListener(() => setState(() {}));
+
+    animation = ColorTween(
+      begin: Colors.blueGrey,
+      end: Colors.white,
+    ).animate(animationController);
+  }
+
+  @override
+  void dispose() {
+    // Even if this screen is dismissed, that controller still lived on, and
+    // it's costing resources.
+    // So, whenever you're using animation controllers, it's really important
+    // that you tap into the dispose method. So when the screen is going to be
+    // disposed or when this welcome screen state is going to be destroyed,
+    // we have to make sure that we also dispose our controller.
+    // So, this way it doesn't end up staying in memory & hogging all the resources.
+    animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -29,7 +64,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                 Hero(
                   tag: kLogoImageTag,
                   child: SizedBox(
-                    height: 60.0,
+                    height: 60,
                     child: Image.asset(kLogoImagePath),
                   ),
                 ),
