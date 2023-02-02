@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -68,12 +69,17 @@ class WelcomeScreenState extends State<WelcomeScreen>
                     child: Image.asset(kLogoImagePath),
                   ),
                 ),
-                const Text(
-                  kFlashChatTitle,
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                  ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      kFlashChatTitle,
+                      speed: const Duration(milliseconds: 250),
+                      textStyle: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
