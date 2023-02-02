@@ -47,6 +47,19 @@ class WelcomeScreenState extends State<WelcomeScreen>
   }
 
   @override
+  void dispose() {
+    // Even if this screen is dismissed, that controller still lived on, and
+    // it's costing resources.
+    // So, whenever you're using animation controllers, it's really important
+    // that you tap into the dispose method. So when the screen is going to be
+    // disposed or when this welcome screen state is going to be destroyed,
+    // we have to make sure that we also dispose our controller.
+    // So, this way it doesn't end up staying in memory & hogging all the resources.
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
