@@ -23,20 +23,20 @@ class WelcomeScreenState extends State<WelcomeScreen>
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
+      upperBound: 100,
     );
 
     animationController.forward();
 
     animationController.addListener(() {
       setState(() {});
-      print(animationController.value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red.withOpacity(animationController.value),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -52,9 +52,9 @@ class WelcomeScreenState extends State<WelcomeScreen>
                     child: Image.asset(kLogoImagePath),
                   ),
                 ),
-                const Text(
-                  kFlashChatTitle,
-                  style: TextStyle(
+                Text(
+                  '${animationController.value.toInt()}%',
+                  style: const TextStyle(
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,
                   ),
