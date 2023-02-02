@@ -16,6 +16,7 @@ class WelcomeScreen extends StatefulWidget {
 class WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
+  late Animation animation;
 
   @override
   void initState() {
@@ -23,7 +24,13 @@ class WelcomeScreenState extends State<WelcomeScreen>
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
-      upperBound: 60,
+    );
+
+    // Make sure that when you are applying a curved animation to your controller
+    // that we can't actually have an upperBound that's greater than 1.
+    animation = CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeIn,
     );
 
     animationController.forward();
@@ -48,7 +55,11 @@ class WelcomeScreenState extends State<WelcomeScreen>
                 Hero(
                   tag: kLogoImageTag,
                   child: SizedBox(
-                    height: animationController.value,
+                    // But having an animation that goes from 0 to 1 for the size
+                    // of our image is not very useful because we won't be able
+                    // to see a change between 0 and 1.
+                    // So let's multiply that number by 60 to exaggerate the effect.
+                    height: animation.value * 60,
                     child: Image.asset(kLogoImagePath),
                   ),
                 ),
