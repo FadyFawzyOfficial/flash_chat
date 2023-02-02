@@ -33,9 +33,17 @@ class WelcomeScreenState extends State<WelcomeScreen>
       curve: Curves.decelerate,
     );
 
-    animationController.reverse(from: 1);
+    animationController.forward();
 
     animationController.addListener(() => setState(() {}));
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        animationController.reverse(from: 1);
+      } else if (status == AnimationStatus.dismissed) {
+        animationController.forward();
+      }
+    });
   }
 
   @override
