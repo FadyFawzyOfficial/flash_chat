@@ -23,7 +23,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
-      upperBound: 100,
+      upperBound: 60,
     );
 
     animationController.forward();
@@ -48,13 +48,13 @@ class WelcomeScreenState extends State<WelcomeScreen>
                 Hero(
                   tag: kLogoImageTag,
                   child: SizedBox(
-                    height: 60.0,
+                    height: animationController.value,
                     child: Image.asset(kLogoImagePath),
                   ),
                 ),
-                Text(
-                  '${animationController.value.toInt()}%',
-                  style: const TextStyle(
+                const Text(
+                  kFlashChatTitle,
+                  style: TextStyle(
                     fontSize: 45.0,
                     fontWeight: FontWeight.w900,
                   ),
