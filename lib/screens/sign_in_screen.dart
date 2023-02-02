@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class SignInScreen extends StatefulWidget {
   static const name = 'signIn';
 
@@ -20,9 +22,12 @@ class SignInScreenState extends State<SignInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 200.0,
-              child: Image.asset('assets/images/logo.png'),
+            Hero(
+              tag: kLogoImageTag,
+              child: SizedBox(
+                height: 200.0,
+                child: Image.asset(kLogoImagePath),
+              ),
             ),
             const SizedBox(height: 48),
             TextField(
