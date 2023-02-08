@@ -41,6 +41,15 @@ dependencies:
   animated_text_kit: ^4.2.2
   # A Flutter plugin to use the Firebase Core API, which enables connecting to multiple Firebase apps.
   firebase_core: ^2.4.1
+  # Flutter plugin for Firebase Auth, enabling Android and iOS authentication using passwords, phone numbers
+  # and identity providers like Google, Facebook and Twitter.
+  # I have made a like 👍🏼 for this plugin after 3000 => 3001 😂😅
+  # Eng. Fady Fawzy
+  firebase_auth: ^4.2.5
+  # Flutter plugin for Cloud Firestore, a cloud-hosted, noSQL database with live synchronization
+  # and offline support on Android and iOS.
+  cloud_firestore: ^4.3.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
