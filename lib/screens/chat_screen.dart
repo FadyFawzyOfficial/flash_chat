@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
+final _firestore = FirebaseFirestore.instance;
+
 class ChatScreen extends StatefulWidget {
   static const name = 'chat';
 
@@ -15,7 +17,7 @@ class ChatScreen extends StatefulWidget {
 
 class ChatScreenState extends State<ChatScreen> {
   final _firebaseAuth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
+  final controller = TextEditingController();
   late User user;
   late String message;
 
@@ -34,9 +36,8 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () {
-              messages;
-              // _firebaseAuth.signOut();
-              // Navigator.pop(context);
+              _firebaseAuth.signOut();
+              Navigator.pop(context);
             },
           ),
         ],
@@ -48,22 +49,7 @@ class ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            StreamBuilder(
-              stream: _firestore.collection(kMessagesKey).snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                final messages = snapshot.data!.docs;
-                List<Text> messagesWidget = [];
-                for (var message in messages) {
-                  final messageText = message.data()[kMessageKey];
-                  final messageSender = message.data()[kSenderKey];
-                  messagesWidget.add(Text('$messageText from $messageSender'));
-                }
-                return Column(children: messagesWidget);
-              },
-            ),
+            const MessagesStream(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -71,15 +57,20 @@ class ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: controller,
                       onChanged: (input) => message = input,
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   TextButton(
-                    onPressed: () => _firestore.collection(kMessagesKey).add({
-                      kMessageKey: message,
-                      kSenderKey: user.email,
-                    }),
+                    onPressed: () {
+                      controller.clear();
+
+                      _firestore.collection(kMessagesKey).add({
+                        kMessageKey: message,
+                        kSenderKey: user.email,
+                      });
+                    },
                     child: const Text(
                       kSendLabel,
                       style: kSendButtonTextStyle,
@@ -100,26 +91,86 @@ class ChatScreenState extends State<ChatScreen> {
 
       if (currentUser != null) {
         user = currentUser;
-        print(currentUser.email);
       }
     } catch (e) {
-      print(e);
+      debugPrint('$e');
     }
   }
+}
 
-  // void get messages async {
-  //   final messages = await _firestore.collection(kMessagesKey).get();
-  //   for (var message in messages.docs) {
-  //     print(message.data());
-  //   }
-  // }
+class MessagesStream extends StatelessWidget {
+  const MessagesStream({super.key});
 
-  void get messages async {
-    await for (var snapshots
-        in _firestore.collection(kMessagesKey).snapshots()) {
-      for (var message in snapshots.docs) {
-        print(message.data());
-      }
-    }
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: _firestore.collection(kMessagesKey).snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final messages = snapshot.data!.docs;
+        List<MessageBubble> messageBubbles = [];
+
+        for (var message in messages) {
+          final messageText = message.data()[kMessageKey];
+          final sender = message.data()[kSenderKey];
+
+          messageBubbles.add(MessageBubble(
+            message: messageText,
+            sender: sender,
+          ));
+        }
+        return Expanded(
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: messageBubbles,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  final String message;
+  final String sender;
+
+  const MessageBubble({
+    super.key,
+    required this.message,
+    required this.sender,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            sender,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.black54,
+            ),
+          ),
+          Material(
+            elevation: 5,
+            color: Colors.lightBlueAccent,
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                message,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
