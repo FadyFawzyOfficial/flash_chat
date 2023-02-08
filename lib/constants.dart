@@ -8,12 +8,18 @@ const kSignInLabel = 'Sign In';
 const kSignUpLabel = 'Sign Up';
 const kEmailFieldLabel = 'Enter your email';
 const kPasswordFieldLabel = 'Enter your password';
+const kSendLabel = 'Send';
 
 // Animations Tags
 const kLogoImageTag = 'logo';
 
 // Images Paths
 const kLogoImagePath = 'assets/images/logo.png';
+
+// Firebase Firestore Keys
+const kMessagesKey = 'messages';
+const kMessageKey = 'message';
+const kSenderKey = 'sender';
 
 const kSendButtonTextStyle = TextStyle(
   color: Colors.lightBlueAccent,
