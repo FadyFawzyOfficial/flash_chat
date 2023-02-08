@@ -48,6 +48,22 @@ class ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            StreamBuilder(
+              stream: _firestore.collection(kMessagesKey).snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final messages = snapshot.data!.docs;
+                List<Text> messagesWidget = [];
+                for (var message in messages) {
+                  final messageText = message.data()[kMessageKey];
+                  final messageSender = message.data()[kSenderKey];
+                  messagesWidget.add(Text('$messageText from $messageSender'));
+                }
+                return Column(children: messagesWidget);
+              },
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
