@@ -18,14 +18,7 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> {
   final _firebaseAuth = FirebaseAuth.instance;
   final controller = TextEditingController();
-  late User user;
   late String message;
-
-  @override
-  void initState() {
-    super.initState();
-    currentUser;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +61,7 @@ class ChatScreenState extends State<ChatScreen> {
 
                       _firestore.collection(kMessagesKey).add({
                         kMessageKey: message,
-                        kSenderKey: user.email,
+                        kSenderKey: userEmail,
                       });
                     },
                     child: const Text(
@@ -85,15 +78,12 @@ class ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  void get currentUser {
+  String get userEmail {
     try {
-      final currentUser = _firebaseAuth.currentUser;
-
-      if (currentUser != null) {
-        user = currentUser;
-      }
+      return _firebaseAuth.currentUser?.email ?? '';
     } catch (e) {
       debugPrint('$e');
+      rethrow;
     }
   }
 }
@@ -160,7 +150,11 @@ class MessageBubble extends StatelessWidget {
           Material(
             elevation: 5,
             color: Colors.lightBlueAccent,
-            borderRadius: const BorderRadius.all(Radius.circular(30)),
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+              topLeft: Radius.circular(30),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
