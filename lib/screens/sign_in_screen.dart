@@ -32,6 +32,8 @@ class SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 48),
             TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
               onChanged: (value) {
                 //Do something with the user input.
               },
@@ -39,6 +41,8 @@ class SignInScreenState extends State<SignInScreen> {
             ),
             const SizedBox(height: 8.0),
             TextField(
+              obscureText: true,
+              textAlign: TextAlign.center,
               onChanged: (value) {
                 //Do something with the user input.
               },
