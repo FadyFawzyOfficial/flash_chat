@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "328390235446",
+    "project_id": "fady-flash-chat",
+    "storage_bucket": "fady-flash-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328390235446:android:877989f4c579aa4be18f97",
+        "android_client_info": {
+          "package_name": "com.fadyfawzy.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328390235446-cviepu1vis7s4rc1s5tfgv48sptm1o6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZcp5x2E1lLB8gCT6PlzeTQJhecSLDg00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328390235446-cviepu1vis7s4rc1s5tfgv48sptm1o6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
