@@ -34,8 +34,9 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () {
-              _firebaseAuth.signOut();
-              Navigator.pop(context);
+              messages;
+              // _firebaseAuth.signOut();
+              // Navigator.pop(context);
             },
           ),
         ],
@@ -87,6 +88,22 @@ class ChatScreenState extends State<ChatScreen> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  // void get messages async {
+  //   final messages = await _firestore.collection(kMessagesKey).get();
+  //   for (var message in messages.docs) {
+  //     print(message.data());
+  //   }
+  // }
+
+  void get messages async {
+    await for (var snapshots
+        in _firestore.collection(kMessagesKey).snapshots()) {
+      for (var message in snapshots.docs) {
+        print(message.data());
+      }
     }
   }
 }
