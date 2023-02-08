@@ -39,7 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.5
   # A flutter package which contains a collection of cool, beautiful and awesome text animations.
   animated_text_kit: ^4.2.2
-
+  # A Flutter plugin to use the Firebase Core API, which enables connecting to multiple Firebase apps.
+  firebase_core: ^2.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
