@@ -32,11 +32,13 @@ class SignInScreenState extends State<SignInScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Hero(
-                tag: kLogoImageTag,
-                child: SizedBox(
-                  height: 200.0,
-                  child: Image.asset(kLogoImagePath),
+              Flexible(
+                child: Hero(
+                  tag: kLogoImageTag,
+                  child: SizedBox(
+                    height: 200.0,
+                    child: Image.asset(kLogoImagePath),
+                  ),
                 ),
               ),
               const SizedBox(height: 48),
