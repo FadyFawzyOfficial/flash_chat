@@ -31,7 +31,8 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () {
-              //Implement logout functionality
+              _firebaseAuth.signOut();
+              Navigator.pop(context);
             },
           ),
         ],
