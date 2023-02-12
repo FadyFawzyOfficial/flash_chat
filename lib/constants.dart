@@ -20,6 +20,7 @@ const kLogoImagePath = 'assets/images/logo.png';
 const kMessagesKey = 'messages';
 const kMessageKey = 'message';
 const kSenderKey = 'sender';
+const kTimestampKey = 'timestamp';
 
 const kSendButtonTextStyle = TextStyle(
   color: Colors.lightBlueAccent,

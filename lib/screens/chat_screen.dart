@@ -62,6 +62,8 @@ class ChatScreenState extends State<ChatScreen> {
                       _firestore.collection(kMessagesKey).add({
                         kMessageKey: message,
                         kSenderKey: userEmail,
+                        // Here is the "timestamp" field.
+                        kTimestampKey: FieldValue.serverTimestamp(),
                       });
                     },
                     child: const Text(
@@ -94,7 +96,11 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: _firestore.collection(kMessagesKey).snapshots(),
+      stream: _firestore
+          .collection(kMessagesKey)
+          // Here, the ".orderBy" sorts the messages according to the server timestamps.
+          .orderBy(kTimestampKey)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
