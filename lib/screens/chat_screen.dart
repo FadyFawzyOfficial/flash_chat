@@ -40,7 +40,6 @@ class ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const MessagesStream(),
             Container(
@@ -103,7 +102,11 @@ class MessagesStream extends StatelessWidget {
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return Container(
+            margin:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
+            child: const CircularProgressIndicator(),
+          );
         }
 
         final messages = snapshot.data!.docs.reversed;
